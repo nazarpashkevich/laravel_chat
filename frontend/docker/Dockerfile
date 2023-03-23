@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as build-stage
 
 # install simple http server for serving static content
 RUN npm install -g http-server
@@ -18,6 +18,10 @@ COPY . .
 # build app for production with minification
 RUN npm run build
 
-EXPOSE 8080
-
-CMD [ "http-server", "dist" ]
+# production stage
+FROM nginx:1.15.7-alpine as production-stage
+COPY --from=build-stage /var/www/dist /usr/share/nginx/html
+# copy nginx conf
+COPY docker/nginx/*.conf /etc/nginx/conf.d/
+EXPOSE 80
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

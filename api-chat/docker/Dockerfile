@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-WORKDIR /var/www/chat
+WORKDIR /var/www
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -30,8 +30,6 @@ RUN composer install
 RUN chown -R www-data:www-data .
 
 RUN /usr/bin/composer install
-
-# RUN php /var/www/chat/artisan migrate --force
 
 USER root
 
