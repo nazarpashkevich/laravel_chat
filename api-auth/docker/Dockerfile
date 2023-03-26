@@ -15,6 +15,7 @@ RUN apt-get update && \
     zip \
     sqlite3 \
     openssh-client \
+    redis \
     default-mysql-client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

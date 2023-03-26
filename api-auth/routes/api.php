@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// auth routes
+Route::group([
+    'middleware' => [],
+    'prefix'     => '/auth/',
+], function (Registrar $route) {
+    $route->post('login', \App\Actions\LoginAction::class);
+    $route->post('register', \App\Actions\RegisterAction::class);
+});
+
+// user routes
+Route::group([
+    'middleware' => ['auth:sanctum'],
+    'controller' => UserController::class,
+    'prefix'     => '/user/',
+], function (Registrar $route) {
+    $route->get('me', 'show');
 });
