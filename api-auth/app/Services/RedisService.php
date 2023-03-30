@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\UserData;
+use App\Events\UserCreatedEvent;
 
 class RedisService extends BaseRedisService
 {
@@ -11,8 +12,8 @@ class RedisService extends BaseRedisService
         return 'products';
     }
 
-    public function publishUserCreateEvent(UserData $data): void
+    public function publishUserCreateEvent(UserCreatedEvent $event): void
     {
-        $this->publish($data);
+        $this->publish($event);
     }
 }

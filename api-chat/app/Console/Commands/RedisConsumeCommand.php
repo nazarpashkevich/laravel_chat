@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\CreateUserAction;
 use App\DTOs\UserData;
 use App\Services\RedisService;
 use Illuminate\Console\Command;

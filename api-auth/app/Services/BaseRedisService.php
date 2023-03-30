@@ -33,14 +33,9 @@ abstract class BaseRedisService
 
     private function getLastProcessedEventId(): string
     {
-        $lastId = Redis::lindex(
-            $this->getServiceName() . '-' . self::PROCESSED_EVENTS_KEY,
-            -1,
-        );
+        $lastId = Redis::lindex($this->getServiceName() . '-' . self::PROCESSED_EVENTS_KEY, -1);
 
-        return empty($lastId)
-            ? (string) Carbon::now()->subYears(10)->valueOf()
-            : $lastId;
+        return empty($lastId) ? (string) Carbon::now()->subYears(10)->valueOf() : $lastId;
     }
 
     public function addProcessedEvent(array $event): void
@@ -55,11 +50,7 @@ abstract class BaseRedisService
     protected function getEventsAfter(string $start): array
     {
         /** @phpstan-ignore-next-line */
-        $events = Redis::xRange(
-            self::ALL_EVENTS_KEY,
-            $start,
-            (int) Carbon::now()->valueOf()
-        );
+        $events = Redis::xRange(self::ALL_EVENTS_KEY, $start, (int) Carbon::now()->valueOf());
 
         if (!$events) {
             return [];
@@ -77,10 +68,7 @@ abstract class BaseRedisService
     {
         return collect($eventsFromRedis)
             ->map(function (array $item, string $id) {
-                return array_merge(
-                    json_decode($item['event'], true),
-                    ['id' => $id]
-                );
+                return array_merge(json_decode($item['event'], true), ['id' => $id]);
             })->all();
     }
 }
