@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events;
+namespace App\Common\Events;
 
-use App\Common\DTOs\UserData;
+use App\DTOs\UserData;
 use Events;
 
 class UserCreatedEvent extends AbstractEvent

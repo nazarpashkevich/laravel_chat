@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\DTOs\UserData;
-use App\Models\User;
+use App\Common\DTOs\UserData;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;

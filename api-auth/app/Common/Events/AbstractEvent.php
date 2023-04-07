@@ -2,9 +2,11 @@
 
 namespace App\Events;
 
-abstract class AbstractEvent
+use Illuminate\Contracts\Support\Jsonable;
+
+abstract class AbstractEvent implements Jsonable
 {
-    public function toJson(): string
+    public function toJson($options = 0): string
     {
         return json_encode($this);
     }

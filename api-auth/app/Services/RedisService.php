@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\DTOs\UserData;
 use App\Events\UserCreatedEvent;
 
 class RedisService extends BaseRedisService

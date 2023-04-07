@@ -1,1 +1,0 @@
-# @todo gateway auth service with Golang

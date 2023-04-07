@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTOs\UserData;
+use App\Common\DTOs\UserData;
 use App\Events\UserCreatedEvent;
 use App\Models\User;
 use App\Services\RedisService;

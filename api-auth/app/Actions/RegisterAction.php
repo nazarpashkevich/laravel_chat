@@ -2,11 +2,10 @@
 
 namespace App\Actions;
 
-use App\DTOs\UserData;
+use App\Common\DTOs\UserData;
 use App\Services\AuthService;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 class RegisterAction
 {

@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\DTOs\UserData;
+use App\Common\DTOs\UserData;
 use App\Http\Requests\LoginRequest;
 use App\Services\AuthService;
 use F9Web\ApiResponseHelpers;
