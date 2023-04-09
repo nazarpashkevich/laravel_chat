@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 abstract class BaseRedisService
 {
     public const ALL_EVENTS_KEY = 'events';
+
     public const PROCESSED_EVENTS_KEY = 'processed-events';
 
     abstract public function getServiceName(): string;
@@ -18,7 +19,7 @@ abstract class BaseRedisService
         Redis::xadd(self::ALL_EVENTS_KEY, '*', [
             'event' => $data->toJson(),
             'service' => $this->getServiceName(),
-            'createdAt' => now()->format('Y-m-d H:i:s')
+            'createdAt' => now()->format('Y-m-d H:i:s'),
         ]);
     }
 
@@ -33,7 +34,7 @@ abstract class BaseRedisService
 
     private function getLastProcessedEventId(): string
     {
-        $lastId = Redis::lindex($this->getServiceName() . '-' . self::PROCESSED_EVENTS_KEY, -1);
+        $lastId = Redis::lindex($this->getServiceName().'-'.self::PROCESSED_EVENTS_KEY, -1);
 
         return empty($lastId) ? (string) Carbon::now()->subYears(10)->valueOf() : $lastId;
     }
@@ -42,7 +43,7 @@ abstract class BaseRedisService
     {
         /** @phpstan-ignore-next-line */
         Redis::rpush(
-            $this->getServiceName() . '-' . self::PROCESSED_EVENTS_KEY,
+            $this->getServiceName().'-'.self::PROCESSED_EVENTS_KEY,
             $event['id'],
         );
     }
@@ -52,7 +53,7 @@ abstract class BaseRedisService
         /** @phpstan-ignore-next-line */
         $events = Redis::xRange(self::ALL_EVENTS_KEY, $start, (int) Carbon::now()->valueOf());
 
-        if (!$events) {
+        if (! $events) {
             return [];
         }
 

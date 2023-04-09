@@ -8,16 +8,15 @@ use Spatie\LaravelData\Support\Validation\ValidationContext;
 
 class UserData extends \Spatie\LaravelData\Data
 {
-
     public function __construct(
-        public ?int $id = null,
+        public ?int $id,
         public string $email,
         public string $name,
         public ?string $password = null,
         public ?string $picture = null,
         public ?string $onlineAt = null,
-    )
-    {}
+    ) {
+    }
 
     // register or update requests
     public static function rules(ValidationContext $context): array

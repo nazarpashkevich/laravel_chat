@@ -9,9 +9,9 @@ use App\Services\RedisService;
 
 class UserRepository
 {
-
     public function __construct(private RedisService $service)
-    {}
+    {
+    }
 
     public function create(UserData $data): User
     {

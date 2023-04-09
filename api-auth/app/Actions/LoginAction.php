@@ -14,12 +14,9 @@ class LoginAction
 
     const ERROR_MESSAGE = 'Invalid credentials';
 
-    public function __construct(private AuthService $service)
-    {}
-
-    public function __invoke(LoginRequest $request): JsonResponse
+    public function __invoke(LoginRequest $request, AuthService $service): JsonResponse
     {
-        if ($user = $this->service->login($request->login(), $request->password())) {
+        if ($user = $service->login($request->login(), $request->password())) {
             return $this->respondWithSuccess(['user' => UserData::from($user), 'token' => $user->makeWebToken()]);
         }
 

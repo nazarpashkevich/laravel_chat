@@ -25,3 +25,4 @@ COPY --from=build-stage /var/www/dist /usr/share/nginx/html
 COPY docker/nginx/*.conf /etc/nginx/conf.d/
 EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
+

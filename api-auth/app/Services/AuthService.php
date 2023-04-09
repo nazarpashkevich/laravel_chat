@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-
     public function __construct(private UserRepository $repository)
     {
     }

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Contracts\Routing\Registrar;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // auth routes
 Route::group([
     'middleware' => [],
-    'prefix'     => '/auth/',
+    'prefix' => '/auth/',
 ], function (Registrar $route) {
     $route->post('login', \App\Actions\LoginAction::class);
     $route->post('register', \App\Actions\RegisterAction::class);
@@ -29,7 +28,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum'],
     'controller' => UserController::class,
-    'prefix'     => '/user/',
+    'prefix' => '/user/',
 ], function (Registrar $route) {
     $route->get('me', 'show');
+    $route->get('search', 'search');
 });

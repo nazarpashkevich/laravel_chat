@@ -1,6 +1,5 @@
 version: '3'
 services:
-  # later rewrite gateway service with go or php and auth
   gateway:
     image: nginx:alpine
     container_name: gateway
@@ -128,14 +127,14 @@ services:
 #      - "80:80"
 #    networks:
 #      - baseNetwork
-#  redis:
-#    image: redis:6.2.5-alpine
-#    platform: linux/x86_64
-#    container_name: redis
-#    volumes:
-#      - ./docker/redisdata:/data
-#    ports:
-#      - 6379:6379
+  redis:
+    image: redis:6.2.5-alpine
+    platform: linux/x86_64
+    container_name: redis
+    volumes:
+      - ./docker/redisdata:/data
+    ports:
+      - 6379:6379
 networks:
   baseNetwork:
     driver: bridge
